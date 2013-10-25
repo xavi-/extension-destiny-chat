@@ -6,7 +6,6 @@
 	"permissions": [],
 	"content_scripts": [{
 		"matches": ["http://www.twitch.tv/*", "http://destiny.gg/*"],
-		"js": [ "insert.js" ]
-	}],
-	"web_accessible_resources": [ "app.js" ]
+		"js": [ "app.js" ]
+	}]
 }
