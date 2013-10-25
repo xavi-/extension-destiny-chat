@@ -1,4 +1,6 @@
 (function(window, document) {
+	if(!/twitch\.tv\/destiny\b/.test(window.location)) { return; }
+
 	var spinner = document.getElementById("chat_loading_spinner");
 	spinner.parentNode.removeChild(spinner);
 
