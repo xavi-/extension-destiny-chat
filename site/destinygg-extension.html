@@ -98,7 +98,7 @@ $(".install_now").click(function(e) {
 
 	e.preventDefault();
 
-	var link = $(this).data("link");
+	var link = $(this).data("link"), url = $(this).prop("href");
 	chrome.webstore.install(
 		"https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd",
 		function success() {
@@ -107,7 +107,8 @@ $(".install_now").click(function(e) {
 		},
 		function failure(err) {
 			_gaq.push(['_trackEvent', 'Destiny.gg Extension Download', 'Install Failure', link]);
-			alert(err);
+			console.error(err);
+			window.location = url;
 		}
 	);
 });
