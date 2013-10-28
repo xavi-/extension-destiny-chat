@@ -9,6 +9,7 @@
 
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="./favicon.png">
+	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd">
 	<style type="text/css">
 		body {
 			padding-top: 20px;
@@ -51,9 +52,9 @@
 
 		<div class="jumbotron">
 			<h1>Destiny.gg chat on Twitch</h1>
-			<p><a class="install_now" href="https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd"><img src="./screenshot.png" /></a></p>
+			<p><a class="install_now" data-link="jumbo image link" href="https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd"><img src="./screenshot.png" /></a></p>
 			<p class="lead">Now you can chat on <a href="http://destiny.gg">destiny.gg</a> from <a href="http://twitch.tv">twitch.tv</a> thanks to a chrome extension.</p>
-			<a class="btn btn-large btn-success install_now" href="https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd">Install Now</a>
+			<a class="btn btn-large btn-success install_now" data-link="cta link" href="https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd">Install Now</a>
 		</div>
 
 		<div class="row-fluid marketing">
@@ -62,7 +63,7 @@
 				<h4>Features</h4>
 				<p>Replaces twitch chat with <a href="http://www.destiny.gg/chat/faq">destiny.gg's chat system</a>.  Don't miss out on important chat announcements or sparkling conversation from fellow esports fans.  And finally, don't let twitch suppress your dongers.
 				<br/>
-				<a class="install_now" href="https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd">Install now</a></p>
+				<a class="install_now" data-link="description link" href="https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd">Install now</a></p>
 
 				<h4>Save Esports</h4>
 				<p>Destiny is esports.  Twitch is Destiny's home.  Bring Destiny back home. Embedding his chat into Twitch.  Save esports.</p>
@@ -76,5 +77,40 @@
 
 	</div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-4384857-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script');
+        ga.src = 'http://www.google-analytics.com/ga.js';
+        ga.setAttribute('async', 'true');
+        document.documentElement.firstChild.appendChild(ga);
+    })();
+</script>
+<script>
+$(".install_now").click(function(e) {
+	if(!chrome) { return; }
+	if(!chrome.webstore) { return; }
+	if(!chrome.webstore.install) { return; }
+
+	e.preventDefault();
+
+	var link = $(this).data("link");
+	chrome.webstore.install(
+		"https://chrome.google.com/webstore/detail/djfomcefcflgaagokalkkonemgddlndd",
+		function success() {
+			_gaq.push(['_trackEvent', 'Destiny.gg Extension Download', 'Install', link]);
+			window.location = "http://twitch.tv/destiny";
+		},
+		function failure(err) {
+			_gaq.push(['_trackEvent', 'Destiny.gg Extension Download', 'Install Failure', link]);
+			alert(err);
+		}
+	);
+});
+</script>
 </body>
 </html>
