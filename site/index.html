@@ -106,9 +106,11 @@ $(".install_now").click(function(e) {
 			window.location = "http://twitch.tv/destiny";
 		},
 		function failure(err) {
-			_gaq.push(['_trackEvent', 'Destiny.gg Extension Download', 'Install Failure', link]);
+			_gaq.push(
+				['_trackEvent', 'Destiny.gg Extension Download', 'Install Failure: ' + err, link]
+			);
 			console.error(err);
-			window.location = url;
+			if(err.indexOf("cancelled install") === -1) { window.location = url; }
 		}
 	);
 });
